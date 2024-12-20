@@ -1,13 +1,12 @@
 pipeline {
     agent any
     tools {
-            jdk 'JDK 17'
-            maven 'Maven'
+            jdk 'Java17'
+            maven 'Maven3'
     }
     environment {
-            REPO_URL = 'https://github.com/xenonlouis/Gestion_biblioth-que.git'
-            SONARQUBE_CREDENTIALS_ID = 'Secret_Token'
-            GITHUB_CREDENTIALS_ID = 'Github_Token'
+            REPO_URL = 'https://github.com/MINAWI0/GestionBibliotheque.git'
+            SONARQUBE_CREDENTIALS_ID = 'sonar'
     }
     stages {
          stage('clean work-space') {
@@ -17,25 +16,25 @@ pipeline {
          }
          stage('Checkout from github') {
                      steps {
-                         git branch: 'master',
-                         credentialsId: GITHUB_CREDENTIALS_ID,
+                         git branch: 'main',
+                         credentialsId: 'github',
                          url: REPO_URL
                      }
          }
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                bat 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
         stage('Quality Analysis') {
             steps {
-                withSonarQubeEnv(installationName: 'SonarQube' , credentialsId: SONARQUBE_CREDENTIALS_ID) {
-                                    sh 'mvn sonar:sonar'
+                withSonarQubeEnv(installationName: 'sonar' , credentialsId: SONARQUBE_CREDENTIALS_ID) {
+                    bat 'mvn sonar:sonar'
                 }
             }
         }
@@ -48,14 +47,14 @@ pipeline {
      post {
             success {
                 mail(
-                    to: 'adnaneidili@gmail.com',
+                    to: 'minaouimh@gmail.com',
                     subject: 'Build Success',
                     body: 'Le build a été complété avec succès.'
                 )
             }
             failure {
                 mail(
-                    to: 'adnaneidili@gmail.com',
+                    to: 'minaouimh@gmail.com',
                     subject: 'Build Failed',
                     body: 'Le build a échoué.'
                 )
