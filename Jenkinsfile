@@ -5,7 +5,7 @@ pipeline {
             maven 'Maven'
     }
     environment {
-            REPO_URL = 'https://github.com/MINAWI0/GestionBibliotheque.git'
+            REPO_URL = 'https://github.com/xenonlouis/Gestion_biblioth-que.git'
             SONARQUBE_CREDENTIALS_ID = 'sonar'
     }
     stages {
