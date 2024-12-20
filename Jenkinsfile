@@ -6,8 +6,6 @@ pipeline {
     }
     environment {
         REPO_URL = 'https://github.com/xenonlouis/Gestion_biblioth-que.git'
-        SONARQUBE_CREDENTIALS_ID = 'Secret_Token'
-        GITHUB_CREDENTIALS_ID = 'Github_Token'
     }
     stages {
         stage('Clean workspace') {
@@ -18,7 +16,6 @@ pipeline {
         stage('Checkout from GitHub') {
             steps {
                 git branch: 'master',
-                    credentialsId: GITHUB_CREDENTIALS_ID,
                     url: REPO_URL
             }
         }
@@ -34,7 +31,8 @@ pipeline {
         }
         stage('Quality Analysis') {
             steps {
-                withSonarQubeEnv(installationName: 'SonarQube', credentialsId: SONARQUBE_CREDENTIALS_ID) {
+                // Removing the 'credentialsId' to allow anonymous access
+                withSonarQubeEnv(installationName: 'SonarQube') {
                     powershell 'mvn sonar:sonar'
                 }
             }
