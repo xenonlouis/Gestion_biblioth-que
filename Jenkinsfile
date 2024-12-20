@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         REPO_URL = 'https://github.com/xenonlouis/Gestion_biblioth-que.git'
-        SONARQUBE_CREDENTIALS_ID = 'SonarQube'
+        SONARQUBE_CREDENTIALS_ID = 'Secret_Token'
         GITHUB_CREDENTIALS_ID = 'Github_Token'
     }
     stages {
