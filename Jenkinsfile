@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-            jdk 'Java17'
-            maven 'Maven3'
+            jdk 'JDK 17'
+            maven 'Maven'
     }
     environment {
             REPO_URL = 'https://github.com/MINAWI0/GestionBibliotheque.git'
