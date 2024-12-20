@@ -34,6 +34,7 @@ public class DbConnection {
         TYPE_MAPPING.put(double.class, "DOUBLE");
         TYPE_MAPPING.put(Boolean.class, "BOOLEAN");
         TYPE_MAPPING.put(boolean.class, "BOOLEAN");
+
     }
 
     public static Connection getConnection() throws SQLException {
