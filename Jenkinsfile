@@ -7,6 +7,7 @@ pipeline {
     environment {
             REPO_URL = 'https://github.com/xenonlouis/Gestion_biblioth-que.git'
             SONARQUBE_CREDENTIALS_ID = 'sonar'
+            GITHUB_CREDENTIALS_ID = 'Github_Token'
     }
     stages {
          stage('clean work-space') {
@@ -16,8 +17,8 @@ pipeline {
          }
          stage('Checkout from github') {
                      steps {
-                         git branch: 'main',
-                         credentialsId: 'github',
+                         git branch: 'master',
+                         credentialsId: GITHUB_CREDENTIALS_ID,
                          url: REPO_URL
                      }
          }
