@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Quality Analysis') {
             steps {
-                withSonarQubeEnv(installationName: 'sonar' , credentialsId: SONARQUBE_CREDENTIALS_ID) {
+                withSonarQubeEnv(installationName: 'SonarQube' , credentialsId: SONARQUBE_CREDENTIALS_ID) {
                     bat 'mvn sonar:sonar'
                 }
             }
@@ -47,14 +47,14 @@ pipeline {
      post {
             success {
                 mail(
-                    to: 'minaouimh@gmail.com',
+                    to: 'adnaneidili@gmail.com',
                     subject: 'Build Success',
                     body: 'Le build a été complété avec succès.'
                 )
             }
             failure {
                 mail(
-                    to: 'minaouimh@gmail.com',
+                    to: 'adnaneidili@gmail.com',
                     subject: 'Build Failed',
                     body: 'Le build a échoué.'
                 )
